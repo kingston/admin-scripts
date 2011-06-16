@@ -22,12 +22,13 @@ fi
 
 # Configuration
 
-if [ ! -f ./nginx.cfg ]; then
+CONFIG_FILE=`dirname $0`/nginx.cfg
+if [ ! -f $CONFIG_FILE ]; then
     echo "Unable to find nginx.cfg configuration file.  Goodbye!"
     exit 1
 fi
 
-source nginx.cfg
+source $CONFIG_FILE
 
 # Copy template and replace
 
