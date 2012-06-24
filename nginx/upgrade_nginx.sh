@@ -19,6 +19,7 @@ fi
 
 if [ $# -ne $EXPECTED_ARGS ]; then
     echo Usage: $0 version
+    echo Be sure to execute using rvmsudo
     exit $E_BADARGS
 fi
 

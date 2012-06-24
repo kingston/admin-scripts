@@ -45,5 +45,13 @@ fi
 
 ln -s $SOURCE_FILE $TARGET_FILE
 
-echo "Site succesfully enabled!  Please restart nginx to save settings."
+echo "Site succesfully enabled!"
+
+read -p "Restart nginx (y/n)? "
+
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 0
+fi
+
+/etc/init.d/nginx restart
 
