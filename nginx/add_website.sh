@@ -18,7 +18,7 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-if [ $# -ne $EXPECTED_ARGS ]; then
+if [ $# -lt $EXPECTED_ARGS ]; then
     echo "Usage: $0 user domain appname type"
     echo "Possible types: php, rails, static"
     exit $E_BADARGS
