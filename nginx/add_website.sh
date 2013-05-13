@@ -71,6 +71,10 @@ chown -R $USER:$USER $TARGET_DIR
 echo "Website at $DOMAIN successfully created at $TARGET_DIR!"
 echo "Just enable the site and restart nginx to finish it off"
 
+if test -z "$5"; then
+    exit 0
+fi
+
 read -p "Enable website (y/n)? "
 
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
