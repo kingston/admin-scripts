@@ -20,7 +20,7 @@ fi
 
 if [ $# -lt $EXPECTED_ARGS ]; then
     echo "Usage: $0 user domain appname type"
-    echo "Possible types: php, rails, static"
+    echo "Possible types: php, rails, static, node"
     exit $E_BADARGS
 fi
 
@@ -70,6 +70,12 @@ chown -R $USER:$USER $TARGET_DIR
 
 echo "Website at $DOMAIN successfully created at $TARGET_DIR!"
 echo "Just enable the site and restart nginx to finish it off"
+
+if [ $TYPE == "node" ]; then
+  echo "You need to modify port with an appropriate port and set up the node with forever"
+
+  exit 0
+fi
 
 if test -z "$5"; then
     exit 0

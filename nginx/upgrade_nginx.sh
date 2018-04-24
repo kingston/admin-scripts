@@ -12,6 +12,9 @@ NGINX_DIR=/opt/nginx
 EXPECTED_ARGS=1
 E_BADARGS=65
 
+# Terminate on first error
+set -e
+
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root"
     exit 1
@@ -56,11 +59,12 @@ cp -r $NGINX_DIR/conf/sites-available $NGINX_DIR/conf/sites-available-bak
 
 echo "Executing Passenger Phusion..."
 
-echo "Source code is in `pwd`/nginx_source"
-echo "And use the following configure lines:"
-echo "--with-http_ssl_module --add-module=`pwd`/[upload_module_path]"
+echo "Updating passenger"
+gem update passenger
 
-passenger-install-nginx-module
+echo "Installing nginx with passenger..."
+
+passenger-install-nginx-module --nginx-source-dir="`pwd`/nginx_source" --extra-configure-flags="--with-http_ssl_module" --prefix="$NGINX_DIR" --auto
 
 echo "Done!"
 echo "Be sure to update the nginx.conf"
